@@ -15,8 +15,7 @@ pipeline {
         }
         stage('Get Hostname') {
           steps {
-            sh '''uname -a &&
-hostname -i'''
+            sh 'uname -a'
           }
         }
       }
