@@ -26,8 +26,9 @@ pipeline {
         script {
           sshagent (credentials: ['azureuser']) {
             sh 'ssh -o StrictHostKeyChecking=no -l ci-test.eastus.cloudapp.azure.com uname -a'
+          }
         }
-  }
+        
       }
     }
     stage('Deploy') {
