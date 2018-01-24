@@ -2,8 +2,18 @@ pipeline {
   agent any
   stages {
     stage('Build') {
-      steps {
-        echo 'Build'
+      parallel {
+        stage('Build') {
+          steps {
+            echo 'Build'
+          }
+        }
+        stage('Verify Tools') {
+          steps {
+            sh 'docker -v'
+            sh 'python3 --version'
+          }
+        }
       }
     }
     stage('Test') {
