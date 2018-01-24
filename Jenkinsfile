@@ -13,9 +13,9 @@ pipeline {
             sh 'python --version'
           }
         }
-        stage('') {
+        stage('Get Hostname') {
           steps {
-            sh '''uname -a
+            sh '''uname -a &&
 hostname -i'''
           }
         }
