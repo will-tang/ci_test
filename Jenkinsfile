@@ -13,6 +13,12 @@ pipeline {
             sh 'python --version'
           }
         }
+        stage('') {
+          steps {
+            sh '''uname -a
+hostname -i'''
+          }
+        }
       }
     }
     stage('Test') {
