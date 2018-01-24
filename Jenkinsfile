@@ -25,7 +25,7 @@ pipeline {
       steps {
         script {
           sshagent (credentials: ['azureuser']) {
-            sh 'ssh -o StrictHostKeyChecking=no -l ci-test.eastus.cloudapp.azure.com mkdir -p /opt/test_pipe'
+            sh 'ssh azureuser@ci-test.eastus.cloudapp.azure.com "uname -a"'
           }
         }
         
