@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Verify Tools') {
           steps {
-            sh 'python3 --version'
+            sh 'python --version'
           }
         }
       }
