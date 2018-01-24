@@ -10,7 +10,6 @@ pipeline {
         }
         stage('Verify Tools') {
           steps {
-            sh 'docker -v'
             sh 'python3 --version'
           }
         }
