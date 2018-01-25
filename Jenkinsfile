@@ -1,5 +1,6 @@
 #!/usr/bin/env groovy
 
+pipline{
 node('master') {
     try {
         stage('build') {
@@ -35,5 +36,5 @@ node('master') {
     } finally {
 
     }
-
+}
 }
