@@ -24,7 +24,7 @@ pipeline {
     stage('Test') {
       steps {
         script {
-          sshagent (credentials: ['azureuser']) {
+          sshagent (['41bcee21-1f60-4df7-b4c6-2fb94c2a6606']) {
             sh 'ssh azureuser@ci-test.eastus.cloudapp.azure.com "uname -a"'
           }
         }
