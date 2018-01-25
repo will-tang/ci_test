@@ -1,40 +1,33 @@
-pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      parallel {
-        stage('Build') {
-          steps {
-            echo 'Build'
-          }
+#!/usr/bin/env groovy
+
+node('master') {
+    try {
+        stage('build') {
+            // checkout scm
+
+            // sh "composer install"
+            // sh "cp .env.example .env"
+            // sh "php artisan key:generate"
+            sh "echo 'build'"
         }
-        stage('Verify Tools') {
-          steps {
-            sh 'python --version'
-          }
+
+        stage('test') {
+            // sh "./vendor/bin/phpunit"
+          properties([pipelineTriggers([[$class: 'GitHubPushTrigger'], pollSCM('H/15 * * * *')])])
+          // checkout scm
+          // env.PATH = "${tool 'Maven 3'}/bin:${env.PATH}"
+          // sh 'mvn clean package'
+          sh "echo 'test by trigger'"
         }
-        stage('Get Hostname') {
-          steps {
-            sh 'uname -a'
-            sh 'hostname -i'
-          }
+
+        stage('deploy') {
+            // ansible-playbook -i ./ansible/hosts ./ansible/deploy.yml
+            sh "echo 'WE ARE DEPLOYING'"
         }
-      }
+    } catch(error) {
+        throw error
+    } finally {
+
     }
-    stage('Test') {
-      steps {
-        script {
-          sshagent (credentials:['41bcee21-1f60-4df7-b4c6-2fb94c2a6606']) {
-            sh 'ssh azureuser@ci-test.eastus.cloudapp.azure.com "uname -a"'
-          }
-        }
-        
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploy'
-      }
-    }
-  }
+
 }
