@@ -1,8 +1,5 @@
 pipeline {
   agent any
-  triggers { 
-    pollSCM('* * * * *') 
-  }
   stages {
     stage('build') {
       steps {
@@ -26,5 +23,8 @@ pipeline {
   }
   parameters {
     string(name: 'RELEASE_VERSION', defaultValue: '1.0.0', description: 'Application git release tag version')
+  }
+  triggers {
+    pollSCM('* * * * *')
   }
 }
